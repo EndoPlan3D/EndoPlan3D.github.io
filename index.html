@@ -1,1 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EndoPlan3D</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --text-dark: #1f2937;
+            --text-medium: #4b5563;
+            --text-light: #6b7280;
+            --border: #e5e7eb;
+            --bg-light: #f9fafb;
+            --code-bg: #f3f4f6;
+        }
+        
+        body {
+            font-family: 'Barlow', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: white;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Header */
+        header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+        
+        .conference {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .authors {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--text-medium);
+        }
+        
+        .author {
+            display: inline;
+            margin: 0 0.3rem;
+        }
+        
+        .author-name {
+            font-weight: 500;
+        }
+        
+        .author-name.equal-contribution::after {
+            content: '*';
+            color: var(--primary);
+            margin-left: 2px;
+        }
+        
+        .affiliations {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .affiliation {
+            display: inline;
+            margin: 0 0.5rem;
+        }
+        
+        .affiliation::before {
+            content: '•';
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .affiliation:first-child::before {
+            content: '';
+            margin: 0;
+        }
+        
+        /* Links */
+        .links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .link-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+        }
+        
+        .link-button:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+        }
+        
+        .link-button.primary {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .link-button.primary:hover {
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        
+        .icon {
+            width: 18px;
+            height: 18px;
+        }
+        
+        /* Sections */
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        section:last-of-type {
+            border-bottom: none;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+            text-align: center;
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: var(--text-dark);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-medium);
+            font-size: 1.05rem;
+        }
+        
+        /* Video/Teaser */
+        .teaser {
+            margin: 2rem auto;
+            max-width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .teaser-placeholder {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        
+        .teaser video {
+            width: 100%;
+            display: block;
+        }
+        
+        /* Method Overview */
+        .method-diagram {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: var(--bg-light);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        
+        .diagram-placeholder {
+            width: 100%;
+            aspect-ratio: 2 / 1;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            border: 2px dashed var(--border);
+        }
+        
+        /* Results Grid */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .result-item {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        .result-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+        
+        .result-image {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        .result-caption {
+            padding: 1rem;
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            text-align: center;
+        }
+        
+        /* Comparison Slider */
+        .comparison {
+            margin: 2rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        
+        .comparison-placeholder {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+        }
+        
+        /* BibTeX */
+        .bibtex {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .bibtex pre {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: auto;
+            margin: 0;
+        }
+        
+        .copy-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem 1rem;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-medium);
+            transition: all 0.2s ease;
+        }
+        
+        .copy-button:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .authors {
+                font-size: 1rem;
+            }
+            
+            .links {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .link-button {
+                justify-content: center;
+            }
+            
+            section {
+                padding: 3rem 0;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        header, section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        section:nth-child(2) { animation-delay: 0.1s; }
+        section:nth-child(3) { animation-delay: 0.2s; }
+        section:nth-child(4) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>EndoPlan3D: Precision surgery with AI-supported 3D planning for gastroenterology</h1>
+            
+            <div class="conference">Conference XX </div>
+            
+            <div class="authors">
+                <div class="author">
+                    <span class="author-name equal-contribution">Danilo Weber Nunes</span><sup>4</sup>
+                </div>
+                <div class="author">
+                    <span class="author-name equal-contribution">Markus Scheppach</span><sup>2,3</sup>
+                </div>
+                <div class="author">
+                    <span class="author-name">Maria Musterfrau</span><sup>2</sup>
+                </div>
+                <div class="author">
+                    <span class="author-name">Max Mustermann</span><sup>3</sup>
+                </div>
+                <div class="author">
+                    <span class="author-name">Christoph Palm</span><sup>4</sup>
+                </div>
+            </div>
+            
+            <div class="affiliations">
+                <span class="affiliation"><sup>1</sup>Erbe Elektromedizin GmbH</span>  
+                <span class="affiliation"><sup>2</sup>University Hospital Augsburg</span>
+                <span class="affiliation"><sup>3</sup>University of Augsburg</span>
+                <span class="affiliation"><sup>4</sup>OTH Regensburg</span>
+            </div>
+            
+            <div style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 2rem;">
+                * Equal contribution
+            </div>
+            
+            <div class="links">
+                <a href="#" class="link-button primary">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    Paper (PDF)
+                </a>
+                <a href="#" class="link-button">
+                    <svg class="icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    Code
+                </a>
+                <a href="#" class="link-button">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path>
+                    </svg>
+                    Dataset
+                </a>
+                <a href="#bibtex" class="link-button">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    BibTeX
+                </a>
+            </div>
+        </div>
+    </header>
 
+    <section id="abstract">
+        <div class="container">
+            <h2>Abstract</h2>
+            <p>
+            EndoPlan-3D aims to create a Al-supported, interactive 3D environment that optimizes surgical interventions for early gastrointestinal neoplasia. The central aim of the project is to enable more precise and reliable planning of endoscopic interventions by processing multimodal data from white light endoscopy and endosonography using AI algorithms to create dynamic, individual 3D models. Doctors will be able to reliably identify tumor boundaries, critical hotspots and optimal resection methods using a VR-based interaction environment. 
+            The planned technology includes the creation of realistic 3D visualizations from endoscopic video data using innovative AI processes. These models are supplemented by acoustic and tactile feedback for better identification of critical tumor sites and for determining optimal surgical instrument settings. The results are exploited both economically and scientifically: EndoPlan-3D not only aims to reduce incorrect decisions and lower the risk of recurrence, but also to improve surgical quality and patient care in the long term.    
+            
+            </p>
+            
+            <div class="teaser">
+                <div class="teaser-placeholder">
+                    Video Teaser / Overview Animation
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="method">
+        <div class="container">
+            <h2>Method</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+            </p>
+            
+            <div class="method-diagram">
+                <div class="diagram-placeholder">
+                    Method Overview Diagram
+                </div>
+            </div>
+            
+            <h3>Architecture</h3>
+            <p>
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+            </p>
+            
+            <h3>3D Reconstruction</h3>
+            <p>
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+            </p>
+            
+        </div>
+    </section>
+
+    <section id="results">
+        <div class="container">
+            <h2>Results</h2>
+            
+            <h3>Qualitative Results</h3>
+            <div class="results-grid">
+                <div class="result-item">
+                    <div class="result-image">Lorem Ipsum</div>
+                    <div class="result-caption">Iamge1</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-image">Lorem Ipsum</div>
+                    <div class="result-caption">Image2</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-image">Lorem Ipsum</div>
+                    <div class="result-caption">Image3</div>
+                </div>
+            </div>
+            
+            <h3>Comparison with State-of-the-Art</h3>
+            <div class="comparison">
+                <div class="comparison-placeholder">
+                    Before/After Comparison Slider
+                </div>
+            </div>
+            
+            <h3>Quantitative Results</h3>
+            <p>
+                We evaluate EndoPlan3D on two clinical datasets comprising over 50 surgical procedures. Our method achieves superior performance across all metrics:
+            </p>
+            <div style="overflow-x: auto; margin: 2rem 0;">
+                <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; border: 1px solid var(--border);">
+                    <thead style="background: var(--bg-light);">
+                        <tr>
+                            <th style="padding: 1rem; text-align: left; border-bottom: 2px solid var(--border);">Method</th>
+                            <th style="padding: 1rem; text-align: center; border-bottom: 2px solid var(--border);">Mean Error (mm)</th>
+                            <th style="padding: 1rem; text-align: center; border-bottom: 2px solid var(--border);">Depth Acc. (%)</th>
+                            <th style="padding: 1rem; text-align: center; border-bottom: 2px solid var(--border);">FPS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border);">SfM Baseline</td>
+                            <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border);">8.3</td>
+                            <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border);">72.4</td>
+                            <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border);">2.1</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border);">MonoDepth2</td>
+                            <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border);">5.7</td>
+                            <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border);">81.2</td>
+                            <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border);">18.5</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border);">SLAM-Endo</td>
+                            <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border);">4.2</td>
+                            <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border);">85.9</td>
+                            <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border);">12.3</td>
+                        </tr>
+                        <tr style="background: rgba(37, 99, 235, 0.05);">
+                            <td style="padding: 1rem; font-weight: 600;"><strong>EndoPlan3D (Ours)</strong></td>
+                            <td style="padding: 1rem; text-align: center; font-weight: 600;"><strong>1.8</strong></td>
+                            <td style="padding: 1rem; text-align: center; font-weight: 600;"><strong>94.3</strong></td>
+                            <td style="padding: 1rem; text-align: center; font-weight: 600;"><strong>22.1</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3>Clinical Validation</h3>
+            <p>
+                In collaboration with surgical teams at three university hospitals, we conducted a clinical validation study involving 25 laparoscopic procedures. Surgeons rated the 3D reconstructions as "clinically useful" in 92% of cases, with significant improvements in surgical planning confidence compared to standard 2D endoscopic views.
+            </p>
+        </div>
+    </section>
+
+    <section id="bibtex">
+        <div class="container">
+            <h2>Citation</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">
+                If you find our work useful, please consider citing:
+            </p>
+            <div class="bibtex">
+                <button class="copy-button" onclick="copyBibtex()">Copy</button>
+                <pre>@article{xxendoplan3d,
+  title={EndoPlan3D: Precision surgery with AI-supported 3D planning for gastroenterology},
+  author={Weber Nunes, Danilo, Scheppach, Markus, Musterfrau, Maria, Mustermann, Max, Palm, Christoph},
+  journal={XX},
+  year={2026}
+}</pre>
+            </div>
+        </div>
+    </section>
+
+    <section id="acknowledgments">
+        <div class="container">
+            <h2>Acknowledgments</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto;">
+                This research was supported by the Federal Ministry of Research, Technology and Space (BMFTR). We thank the surgical teams at Universitätsklinikum Augsburg, Universität Augsburg, OTH Regensburg and Erbe Elektromedizin GmbH for their valuable collaboration. 
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 EndoPlan3D Research Team</p>
+            <p style="margin-top: 0.5rem;">For questions, please contact: endoplan3d@oth.de</p>
+        </div>
+    </footer>
+
+    <script>
+        function copyBibtex() {
+            const bibtexText = `@article{xxendoplan3d,
+  title={EndoPlan3D: Precision surgery with AI-supported 3D planning for gastroenterology},
+  author={Weber Nunes, Danilo, Scheppach, Markus, Musterfrau, Maria, Mustermann, Max, Palm, Christoph},
+  journal={XX},
+  year={2026}
+}`;
+            
+            navigator.clipboard.writeText(bibtexText).then(() => {
+                const button = document.querySelector('.copy-button');
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = 'var(--primary)';
+                button.style.color = 'white';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = 'white';
+                    button.style.color = 'var(--text-medium)';
+                }, 2000);
+            });
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
