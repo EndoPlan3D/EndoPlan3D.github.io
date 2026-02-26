@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EndoPlan-3D - Forschungsprojekt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Header */
+        header {
+            color: #0066a1;
+            padding: 2rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.95;
+        }
+        
+        /* Main Content */
+        main {
+            padding: 3rem 0;
+        }
+        
+        .hero-image {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .hero-placeholder {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .image-caption {
+            text-align: right;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        /* Sections */
+        section {
+            margin-bottom: 3rem;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: #0066a1;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #0066a1;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: #0066a1;
+            margin: 2rem 0 1rem;
+            font-weight: 600;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+            color: #444;
+            font-size: 1rem;
+        }
+        
+        /* Lists */
+        ul {
+            margin: 1rem 0 1rem 2rem;
+            list-style: disc;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            color: #444;
+        }
+        
+        li a {
+            color: #0066a1;
+            text-decoration: none;
+        }
+        
+        li a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Info Box */
+        .info-box {
+            background: #f5f5f5;
+            border-left: 4px solid #0066a1;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+        
+        .info-box p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-box strong {
+            color: #0066a1;
+        }
+        
+        /* Logos */
+        .logos {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        
+        .logo-placeholder {
+            width: 200px;
+            height: 80px;
+            background: #f0f0f0;
+            border: 2px dashed #ccc;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #999;
+        }
+        
+        /* Footer */
+        footer {
+            background: #f5f5f5;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid #ddd;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h4 {
+            color: #0066a1;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            font-size: 0.9rem;
+            color: #666;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a:hover {
+            color: #0066a1;
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            h3 {
+                font-size: 1.2rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            main {
+                padding: 2rem 0;
+            }
+            
+            .logos {
+                justify-content: center;
+            }
+            
+            .logo-placeholder {
+                width: 150px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div>
+                <img src="images/Logo_Entwurf_2.png" alt="EndoPlan-3D Logo" style="width: 50%; display: block;">
+            </div>
+            <h1> Precision surgery with AI-supported 3D planning for gastroenterology</h1>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+
+<section id="privacypolicy">
+
+        <h2>Privacy Policy</h2>
+
+    <h3>1. Responsible Party</h3>
+    <p>
+        Prof. Dr. Christoph Palm<br>
+        Galgenbergstr. 32<br>
+        93053 Regensburg<br>
+        christoph.palm (At) oth (Minus) regensburg.de
+    </p>
+
+    <h3>2. General Information</h3>
+    <p>
+        This website is a static project page containing only text and images. 
+        No personal data is actively collected, stored or processed by the operators of this website.
+        No cookies are set, no tracking tools are used and no user accounts exist.
+    </p>
+
+    <h3>3. Hosting via GitHub Pages</h3>
+    <p>
+        This website is hosted via GitHub Pages, a service provided by GitHub Inc., 88 Colin P. Kelly Jr. St., 
+        San Francisco, CA 94107, USA. When you visit this page, GitHub may automatically collect technical data 
+        such as your IP address and browser information in server logs. This data processing is carried out by 
+        GitHub and is beyond our control. For more information, please refer to 
+        <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank">
+            GitHub's Privacy Statement
+        </a>.
+    </p>
+
+    <h3>4. Your Rights</h3>
+    <p>
+        Under the GDPR you have the right to access, rectification, erasure, restriction of processing, 
+        and data portability regarding your personal data, as well as the right to object to processing. 
+        If you believe your data protection rights have been violated, you have the right to lodge a complaint 
+        with the competent supervisory authority. In Bavaria, this is:
+    </p>
+    <p>
+        Bayerisches Landesamt für Datenschutzaufsicht (BayLDA)<br>
+        Promenade 18<br>
+        91522 Ansbach<br>
+        <a href="https://www.lda.bayern.de" target="_blank">www.lda.bayern.de</a>
+    </p>
+
+    <h3>5. Changes to this Privacy Policy</h3>
+    <p>
+        We reserve the right to update this privacy policy as necessary to reflect changes in legal 
+        requirements or our services. The current version is always available on this page.
+    </p>
+    </section>
+      </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <a href="imprint.html">Imprint</a>
+                    <a href="privacypolicy">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
