@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EndoPlan-3D - Forschungsprojekt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Header */
+        header {
+            color: #0066a1;
+            padding: 2rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.95;
+        }
+        
+        /* Main Content */
+        main {
+            padding: 3rem 0;
+        }
+        
+        .hero-image {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .hero-placeholder {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .image-caption {
+            text-align: right;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        /* Sections */
+        section {
+            margin-bottom: 3rem;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: #0066a1;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #0066a1;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: #0066a1;
+            margin: 2rem 0 1rem;
+            font-weight: 600;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+            color: #444;
+            font-size: 1rem;
+        }
+        
+        /* Lists */
+        ul {
+            margin: 1rem 0 1rem 2rem;
+            list-style: disc;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            color: #444;
+        }
+        
+        li a {
+            color: #0066a1;
+            text-decoration: none;
+        }
+        
+        li a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Info Box */
+        .info-box {
+            background: #f5f5f5;
+            border-left: 4px solid #0066a1;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+        
+        .info-box p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-box strong {
+            color: #0066a1;
+        }
+        
+        /* Logos */
+        .logos {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        
+        .logo-placeholder {
+            width: 200px;
+            height: 80px;
+            background: #f0f0f0;
+            border: 2px dashed #ccc;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #999;
+        }
+        
+        /* Footer */
+        footer {
+            background: #f5f5f5;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid #ddd;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h4 {
+            color: #0066a1;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            font-size: 0.9rem;
+            color: #666;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a:hover {
+            color: #0066a1;
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            h3 {
+                font-size: 1.2rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            main {
+                padding: 2rem 0;
+            }
+            
+            .logos {
+                justify-content: center;
+            }
+            
+            .logo-placeholder {
+                width: 150px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div>
+                <img src="images/Logo_Entwurf_2.png" alt="EndoPlan-3D Logo" style="width: 50%; display: block;">
+            </div>
+            <h1> Precision surgery with AI-supported 3D planning for gastroenterology</h1>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+
+<section id="imprint">
+    <h2>Imprint</h2>
+
+    <h3>Responsible for editing and design</h3>
+    <p>
+        Prof. Dr. Christoph Palm<br>
+        Galgenbergstr. 32<br>
+        93053 Regensburg<br>
+        christoph.palm (At) oth (Minus) regensburg.de
+    </p>
+    <p>
+        Sümeyye R. Yildiran<br>
+        suemeyye.yildiran (At) oth (Minus) regensburg.de
+    </p>
+
+    <h3>Disclaimer</h3>
+    <p>
+        The responsible person has compiled and checked the information provided in this section to the best of his knowledge and belief. 
+        However, no guarantee is given for the topicality, correctness, completeness or quality and constant availability of the information provided. 
+        Notwithstanding the provisions of § 675 paragraph 2 BGB, the following applies to the information provided:
+        No liability is assumed for damages arising from the use or non-use of the information provided here. 
+        The exclusion of liability does not apply insofar as the provisions of § 839 BGB (liability for breach of official duty) are relevant. 
+        No liability is accepted for any damage caused by computer viruses when calling up or downloading data or installing or using software. 
+        Internet pages identified by name reflect the opinions and findings of the persons writing the text. 
+        The person responsible expressly reserves the right to change, supplement or delete individual web pages or the entire offer without separate 
+        announcement or to discontinue publication temporarily or permanently.
+    </p>
+
+    <h3>Links and references (disclaimer)</h3>
+    <p>
+        The responsible person is only responsible for the "own contents", which are made available for use, according to the relevant laws. 
+        These own contents are to be distinguished from cross-references ("links") to the websites of other providers. 
+        The cross-reference marked as a "link" enables access to "external content". Through the cross-reference, the responsible person merely 
+        provides access to the use of these contents. He is not responsible for this "external" content, as it does not initiate the transmission 
+        of the information, does not select the addressee of the transmitted information and has not selected or changed the transmitted information.
+    </p>
+    <p>
+        The responsible person has no influence on the content of publications and internet presences of third parties and their correctness, 
+        completeness, legality and morality and therefore excludes any liability in this respect. Due to the selected invocation and linking method, 
+        there is no automatic short-term intermediate storage of this "external information" either, so that no responsibility for this external 
+        content arises.
+    </p>
+    <p>
+        When first linking to these Internet offers, the person responsible checked the external content to see whether it could possibly trigger 
+        civil or criminal liability. However, as soon as the person responsible establishes or is informed by others that a concrete offer to which 
+        it has provided a link triggers civil or criminal liability, it will immediately remove the reference to this offer, insofar as this is 
+        technically possible and reasonable. For illegal, incorrect or incomplete contents and in particular for damages resulting from the use or 
+        non-use of third-party information, the respective provider of the site to which reference is made is solely liable. The Ostbayerische 
+        Technische Hochschule expressly distances itself from the contents of third parties and does not adopt their contents as its own.
+    </p>
+
+    <h3>Legal validity of the above mentioned liability exclusions</h3>
+    <p>
+        The above-mentioned disclaimers are to be regarded as part of the Internet offer from which reference was made to this page. 
+        If sections or individual terms of this statement are not legal or correct, the content or validity of the other parts remain 
+        uninfluenced by this fact.
+    </p>
+</section>
+      </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <a href="imprint.html">Imprint</a>
+                    <a href="privacypolicy.html">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
